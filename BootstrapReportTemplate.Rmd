@@ -1,0 +1,205 @@
+---
+output:
+   knitrBootstrap::bootstrap_document:
+    title: "Bootstrap report"
+    theme: spacelab
+    highlight: sunburst
+    theme.chooser: TRUE
+    highlight.chooser: FALSE
+---
+
+
+Example Elements with KnitrBootStrap
+===============
+
+
+
+# Introduction
+
+<div class='jumbotron'>
+R has some great packages for generating reports. Here are some neat examples of what you can do with the KnitrBootstrap package and rmarkdown
+</div>
+
+The following packages are required:
+
+* knitrBootstrap
+* shiny
+* rCharts
+* googleVis
+* data.table
+* fifer
+
+
+# Simple Table 
+
+```{r, echo=T, warning=FALSE, message=FALSE}
+library(knitr)
+d=head(mtcars)
+kable(d)
+```
+ 
+ 
+# A Fancier HTML Table
+
+This table will sort dynamically if the columns are clicked. Plug any data frame into it.
+
+```{r somdivid, echo=T,results='asis', message=F,warnings=FALSE, tidy=FALSE}
+library(googleVis)
+op <- options(gvis.plot.tag='chart')
+df=mtcars
+plot(gvisTable(df,options=list(page='enable')))
+
+```
+ 
+
+
+# Summary Demographics
+
+Summarized variables into demographic information. Useful for providing high-level stats.
+
+You will require the fifer packages and a  manifest file for this example below
+
+```{r , echo=T, warning=FALSE, message=FALSE ,warning=FALSE}
+library(fifer)
+set.seed(1)
+n <- 50
+df <- data.frame(trt=sample(0:1, 2*n, replace=TRUE), x1=runif(2*n), x2=rnorm(2*n),
+   x3=sample(c("a", "b", "c"), 2*n, replace=TRUE))
+knitr::kable(demographics(trt~x1+x2+x3, data=df))
+```
+
+# Second section
+
+```{r , echo=FALSE, warning=FALSE, message=FALSE}
+boxplot(mtcars$mpg)
+```
+
+***************
+
+# The Tabbed section 
+
+## Quarterly Results {.tabset .tabset-pills }
+
+### By Product
+
+```{r , echo=FALSE, warning=FALSE, message=FALSE}
+boxplot(mtcars$cyl)
+```
+
+### By Region
+
+This be the irirs 
+
+```{r , echo=FALSE, warning=FALSE, message=FALSE}
+boxplot(iris$Sepal.Length)
+```
+
+
+# The Next section
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE }
+library(shiny)
+tags$span(class="label-info label","232423432")
+
+```
+ 
+# googleVis Example
+
+A comnbined plot and table from googleVis
+
+
+```{r ComboExample, echo=FALSE,results='asis', message=F,warnings=FALSE, tidy=FALSE}
+library(googleVis)
+op <- options(gvis.plot.tag='chart')
+
+#plot(gvisTable(mtcars))
+Geo <- gvisGeoChart(Exports, locationvar='Country', colorvar='Profit', 
+                    options=list(height=300, width=350)) 
+Tbl <- gvisTable(Exports, options=list(height=300, width=200))
+plot(gvisMerge(Geo, Tbl, horizontal=TRUE))
+```
+ 
+
+# Pie chart
+
+More googleVis examples. These all require  an internet connection
+
+```{r piechart, echo=FALSE,results='asis', message=F,warnings=FALSE, tidy=FALSE}
+library(googleVis)
+op <- options(gvis.plot.tag='chart')
+Pie2 <- gvisPieChart(CityPopularity, options=list(
+                    slices="{4: {offset: 0.2}, 0: {offset: 0.3}}",
+                    title='City popularity',
+                    legend='none',
+                    pieSliceText='label',
+                    pieHole=0.5))
+plot(Pie2)
+```
+ 
+# Tabset panel from Shiny
+
+```{r sometabs, echo=FALSE,results='asis', message=FALSE,warnings=FALSE, tidy=FALSE}
+library(shiny)
+nTabs = 4
+some_data <- tags$p("Hellow World ")
+createTabs <- function(tabNum, content) {
+      tabPanel(title = paste("Map", tabNum, sep=" "), 
+           content
+      )
+}
+mTabs <- lapply(0:nTabs, createTabs, some_data)
+do.call(tabsetPanel, mTabs)
+```
+
+
+#Formatting {.tabset .tabset-pills }
+
+## KnitrBootsrap Usage
+ 
+Change the YAML front matter to the following below for KnitrBootstrap
+<pre>
+---
+  output:
+  knitrBootstrap::bootstrap_document:
+  title: "Bootstrap report"
+  theme: spacelab
+  highlight: sunburst
+  theme.chooser: TRUE
+  highlight.chooser: FALSE
+  #custom.header: "header.html"
+  
+  
+---
+</pre>
+
+## Regular Knitr
+
+Change the YAML front matter to the following below for Knitr
+<pre>
+
+---
+title: "Regular Knitr"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+      
+      
+---
+
+</pre>
+
+
+
+#Author
+
+Zayed I Alberyn, Dec 2016  [zayed@novocraft.com]
+
+
+
+
+
+# The END 
+
