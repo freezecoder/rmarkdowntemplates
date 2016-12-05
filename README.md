@@ -31,4 +31,9 @@ render('RegularReportTemplate.Rmd', 'knitrBootstrap::bootstrap_document')
 
 ```
 
+## Examples
 
+Download the HTML files in the examples/ folder and open them in your web browser.
+
+
+ 
