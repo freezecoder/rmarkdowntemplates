@@ -101,7 +101,17 @@ library(shiny)
 tags$span(class="label-info label","232423432")
 
 ```
- 
+
+# An interactive Data Table
+
+Requires the (R DT package)[https://rstudio.github.io/DT/]
+
+```{r, echo=T,warning=FALE,message=F}
+df = iris
+datatable(df,filter="top",caption="The Iris table rendered as interactive")
+
+```
+
 # googleVis Example
 
 A comnbined plot and table from googleVis
