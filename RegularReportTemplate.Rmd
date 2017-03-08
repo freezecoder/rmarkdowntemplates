@@ -21,7 +21,8 @@ R has some great packages for generating reports. Here are some neat examples of
 
 The following packages are required:
 
-* knitrBootstrap
+* knitrBootstrap (optional)
+* rmarkdown
 * shiny
 * rCharts
 * googleVis
@@ -29,6 +30,22 @@ The following packages are required:
 * fifer
 * DT
 * ggplot2
+
+
+# How to Use
+
+## Method 1: Rstudio
+Download the Raw version of this file and paste it into Rstudio, render with the "knit HTML" button in Rstudio. 
+
+## Method 2: R terminal
+
+Download and save the raw version. Open an R terminal and run
+
+```{r, echo=T}
+library(rmarkdown)
+if (file.exists("RegularReportTemplate.Rmd"))
+rmarkdown::render("RegularReportTemplate.Rmd")
+```
 
 
 # Simple Table 
