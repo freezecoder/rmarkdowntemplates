@@ -27,6 +27,8 @@ The following packages are required:
 * googleVis
 * data.table
 * fifer
+* DT
+* ggplot2
 
 
 # Simple Table 
@@ -107,6 +109,7 @@ tags$span(class="label-info label","232423432")
 Requires the (R DT package)[https://rstudio.github.io/DT/]
 
 ```{r, echo=T,warning=FALE,message=F}
+library(DT)
 df = iris
 datatable(df,filter="top",caption="The Iris table rendered as interactive")
 
