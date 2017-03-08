@@ -39,7 +39,7 @@ Download the Raw version of this file and paste it into Rstudio, render with the
 
 ## Method 2: R terminal
 
-Download and save the (raw)[https://github.com/freezecoder/rmarkdowntemplates/raw/master/RegularReportTemplate.Rmd] version. Open an R terminal and run
+Download and save the [raw](https://github.com/freezecoder/rmarkdowntemplates/raw/master/RegularReportTemplate.Rmd) version. Open an R terminal and run
 
 ```{r, echo=T}
 library(rmarkdown)
@@ -123,7 +123,7 @@ tags$span(class="label-info label","232423432")
 
 # An interactive Data Table
 
-Requires the (R DT package)[https://rstudio.github.io/DT/]
+Requires the [R DT package](https://rstudio.github.io/DT/)
 
 ```{r, echo=T,warning=FALE,message=F}
 library(DT)
